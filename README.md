@@ -4,6 +4,12 @@ v14.0 Whatsapp Cloud API Wrapper for Golang
 
 Made this cause I haven't found any reliable whatsapp cloud api wrapper for golang
 
+## Installation
+
+```
+go get github.com/febriliankr/whatsapp-cloud-api
+```
+
 ## Getting the Whatsapp Cloud API Access
 
 Official documentation: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
