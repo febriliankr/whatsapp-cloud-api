@@ -12,11 +12,11 @@ Go to your facebook developer console to get the token https://developers.facebo
 
 ## FAQ
 
-Q: How do I signup to get the token?
-A: Here https://developers.facebook.com. Registration guide here: https://developers.facebook.com/docs/development/register/
+- Q: How do I signup to get the token?
+- A: Here https://developers.facebook.com. Registration guide here: https://developers.facebook.com/docs/development/register/
 
-Q: Whats the difference between Qiscus and other provider's Whatsapp API to this Cloud API?
-A: This Cloud API is provided directly by Meta, no need to use 3rd party provider.
+- Q: Whats the difference between Qiscus and other provider's Whatsapp API to this Cloud API?
+- A: This Cloud API is provided directly by Meta, no need to use 3rd party provider.
    More: https://www.qiscus.com/id/blog/meta-luncurkan-whatsap-cloud-api-untuk-publik/
 
 ![The difference](assets/difference_by_qiscus_blog.png)
