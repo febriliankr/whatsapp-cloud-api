@@ -17,6 +17,20 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 	}
 }
 
+func (wa *Whatsapp) SendText(toPhoneNumber string, text string) (res map[string]interface{}, err error) {
+
+	request := map[string]interface{}{
+		"messaging_product": "whatsapp",
+		"to":                toPhoneNumber,
+		"type":              "text",
+		"text": map[string]string{
+			"body": string(text),
+		},
+	}
+	return wa.sendMessage(request)
+
+}
+
 // Sending the whatsapp message
 //  1. `templateName` and `language` can be found in `whatsapp/constants.go` or in your template list dashboard https://business.facebook.com/wa/manage/message-templates
 //  2. `receiverPhoneNumber` is the phone number that will receive the message (eg: 62852000000)

@@ -53,11 +53,16 @@ Check more usage example in example/example.go
 
 ## Getting the Whatsapp Cloud API Access
 
-Official documentation: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
-
-Go to your facebook developer console to get the token https://developers.facebook.com/apps/2017523718408931/whatsapp-business/wa-dev-console
+Official documentation:
+- https://developers.facebook.com/docs/whatsapp?locale=en_US
+- https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
+- Console: https://developers.facebook.com/apps/2017523718408931/whatsapp-business/wa-dev-console
 
 ## FAQ
+
+- Throughput?
+
+  - Cloud API supports 80 messages per second (mps) for text and media as default, up to 250 mps by request. (https://developers.facebook.com/docs/whatsapp/cloud-api/overview)
 
 - Question: How do I signup to get the token?
 
