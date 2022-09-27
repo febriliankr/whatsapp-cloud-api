@@ -45,3 +45,12 @@ res, err := wa.SendWithTemplate(request)
 ```
 
 Check more usage example in example/example.go
+
+## Tutorial for Myself!
+
+Releasing new version
+```
+$ git commit -m "hello: changes for v1.0.0"
+$ git tag v1.0.0
+$ git push origin v1.0.0
+```
