@@ -3,6 +3,7 @@ package whatsapp
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -19,6 +20,40 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 		APIVersion:    "v14.0",
 		PhoneNumberID: phoneNumberID,
 	}
+}
+
+// Sending the whatsapp message
+func (wa *Whatsapp) SendWithTemplateV2(request SendTemplateRequest) (res map[string]interface{}, err error) {
+
+	marshaledJSON, err := json.Marshal(request)
+	if err != nil {
+		return res, err
+	}
+	reqString := string(marshaledJSON)
+
+	body := strings.NewReader(reqString)
+
+	endpoint := fmt.Sprintf("https://graph.facebook.com/%s/%s/messages", wa.APIVersion, wa.PhoneNumberID)
+	req, err := http.NewRequest("POST", endpoint, body)
+	if err != nil {
+		return res, err
+	}
+	req.Header.Set("Authorization", "Bearer "+wa.Token)
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return res, err
+	}
+	defer resp.Body.Close()
+
+	err = json.NewDecoder(resp.Body).Decode(&res)
+	if err != nil {
+		log.Println("42 error:", err)
+		return res, err
+	}
+
+	return res, err
 }
 
 // Sending the whatsapp message
