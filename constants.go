@@ -6,6 +6,7 @@ const (
 	TemplateCertificateAnnouncementIndonesian string = "certificate_announcement_indonesian"
 	TemplatePurchaseFeedback                  string = "purchase_feedback"
 	TemplateOTP                               string = "otp"
+	TemplateTeamGreeter                       string = "team_greeter"
 )
 
 var (
