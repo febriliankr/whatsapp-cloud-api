@@ -10,6 +10,17 @@ Official documentation: https://developers.facebook.com/docs/whatsapp/cloud-api/
 
 Go to your facebook developer console to get the token https://developers.facebook.com/apps/2017523718408931/whatsapp-business/wa-dev-console
 
+## FAQ
+
+Q: How do I signup to get the token?
+A: Here https://developers.facebook.com. Registration guide here: https://developers.facebook.com/docs/development/register/
+
+Q: Whats the difference between Qiscus and other provider's Whatsapp API to this Cloud API?
+A: This Cloud API is provided directly by Meta, no need to use 3rd party provider.
+   More: https://www.qiscus.com/id/blog/meta-luncurkan-whatsap-cloud-api-untuk-publik/
+
+![The difference](assets/difference_by_qiscus_blog.png)
+
 ## Usage
 
 ```
