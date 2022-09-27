@@ -24,7 +24,6 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 
 // Sending the whatsapp message
 func (wa *Whatsapp) SendWithTemplate(request SendTemplateRequest) (res map[string]interface{}, err error) {
-
 	marshaledJSON, err := json.Marshal(request)
 	if err != nil {
 		return res, err
