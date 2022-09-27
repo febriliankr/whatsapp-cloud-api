@@ -4,6 +4,12 @@ Lightweight Whatsapp Cloud API Wrapper v14.0 for Golang with no dependency.
 
 Made this cause I haven't found any reliable whatsapp cloud api wrapper for golang
 
+Content
+- [Installation](#installation)
+- [Getting the Whatsapp Cloud API Access](#getting-the-whatsapp-cloud-api-access)
+- [FAQ](#faq)
+- [Usage](#usage)
+
 ## Installation
 
 ```
@@ -49,7 +55,7 @@ res, err := wa.SendWithTemplate(request)
 
 Check more usage example in example/example.go
 
-## Upgrading Whatsapp Cloud API version
+### Changing Whatsapp Cloud API version
 
 ```
 wa := whatsapp.NewWhatsapp(token, myPhoneID)
