@@ -80,7 +80,7 @@ func (wa *Whatsapp) createSendWithTemplateRequest(receiverPhoneNumber string, te
 		To:               receiverPhoneNumber,
 		Type:             "template",
 		Template: Template{
-			Name:     TemplateVerifyPhoneNumberID,
+			Name:     templateName,
 			Language: LanguageIndonesian,
 			// Components can be empty if you don't want to send any parameters
 			Components: components,
