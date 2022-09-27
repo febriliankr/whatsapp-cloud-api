@@ -1,20 +1,16 @@
 package whatsapp
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"strings"
-)
-
 type Whatsapp struct {
 	Token         string
 	APIVersion    string
 	PhoneNumberID string
+	Language      TemplateLanguage
 }
 
+// Create new Whatsapp instance with v14.0 version and Indonesian as default language
 func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 	return &Whatsapp{
+		Language:      LanguageIndonesian,
 		Token:         token,
 		APIVersion:    "v14.0",
 		PhoneNumberID: phoneNumberID,
@@ -22,37 +18,15 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 }
 
 // Sending the whatsapp message
-func (wa *Whatsapp) SendWithTemplate(request SendWithTemplateRequest) (res map[string]interface{}, err error) {
-	marshaledJSON, err := json.Marshal(request)
-	if err != nil {
-		return res, err
-	}
-	reqString := string(marshaledJSON)
+//  1. `templateName` and `language` can be found in `whatsapp/constants.go` or in your template list dashboard https://business.facebook.com/wa/manage/message-templates
+//  2. `receiverPhoneNumber` is the phone number that will receive the message (eg: 62852000000)
+//  3. `components` is the parameters that will be sent to the receiver (eg: "999999" for OTP), can be empty if your template has no components
+//     components parameter can be empty/nil if you don not want to send any parameters
+func (wa *Whatsapp) SendWithTemplate(receiverPhoneNumber string, templateName string, components []Components) (res map[string]interface{}, err error) {
 
-	body := strings.NewReader(reqString)
+	request := wa.createSendWithTemplateRequest(receiverPhoneNumber, templateName, wa.Language, components)
 
-	endpoint := fmt.Sprintf("https://graph.facebook.com/%s/%s/messages", wa.APIVersion, wa.PhoneNumberID)
-	req, err := http.NewRequest("POST", endpoint, body)
-	if err != nil {
-		return res, err
-	}
-	req.Header.Set("Authorization", "Bearer "+wa.Token)
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return res, err
-	}
-
-	defer resp.Body.Close()
-
-	err = json.NewDecoder(resp.Body).Decode(&res)
-
-	if err != nil {
-		return res, err
-	}
-
-	return res, err
+	return wa.sendMessage(request)
 }
 
 // Parameter if exists
@@ -100,18 +74,14 @@ func (wa *Whatsapp) TemplateComponent(componentType string, args ...[]TemplatePa
 }
 
 // Forge request with receiverPhoneNumber, templateName, Language, and components []Components
-//  1. `templateName` and `language` can be found in `whatsapp/constants.go` or in your template list dashboard (https://business.facebook.com/wa/manage/message-templates/?business_id=886970291828176&waba_id=115257484519594)
-//  2. `receiverPhoneNumber` is the phone number that will receive the message (eg: 62852000000)
-//  3. `components` is the parameters that will be sent to the receiver (eg: "999999" for OTP), can be empty if your template has no components
-//     components parameter can be empty/nil if you don't want to send any parameters
-func (wa *Whatsapp) CreateSendTemplateRequest(receiverPhoneNumber string, templateName string, language TemplateLanguage, components []Components) (res SendWithTemplateRequest) {
+func (wa *Whatsapp) createSendWithTemplateRequest(receiverPhoneNumber string, templateName string, language TemplateLanguage, components []Components) (res SendWithTemplateRequest) {
 	return SendWithTemplateRequest{
 		MessagingProduct: "whatsapp",
 		To:               receiverPhoneNumber,
 		Type:             "template",
 		Template: Template{
 			Name:     TemplateVerifyPhoneNumberID,
-			Language: Indonesian,
+			Language: LanguageIndonesian,
 			// Components can be empty if you don't want to send any parameters
 			Components: components,
 		},

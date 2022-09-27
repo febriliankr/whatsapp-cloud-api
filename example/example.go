@@ -17,8 +17,8 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	myPhoneId := os.Getenv("MY_PHONE_ID")
-	token := os.Getenv("TOKEN")
+	myPhoneId := os.Getenv("WHATSAPP_PHONE_ID")
+	token := os.Getenv("WHATSAPP_TOKEN")
 
 	wa := whatsapp.NewWhatsapp(token, myPhoneId)
 
@@ -26,9 +26,7 @@ func main() {
 
 	components := wa.TemplateComponent("body", parameters)
 
-	request := wa.CreateSendTemplateRequest(receiverPhoneNumber, whatsapp.TemplateVerifyPhoneNumberID, whatsapp.Indonesian, components)
-
-	res, err := wa.SendWithTemplate(request)
+	res, err := wa.SendWithTemplate(receiverPhoneNumber, whatsapp.TemplateVerifyPhoneNumberID, components)
 
 	if err != nil {
 		panic(err)

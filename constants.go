@@ -1,9 +1,15 @@
 package whatsapp
 
-// Templates
-const TemplateVerifyPhoneNumberID = "verify_phone_number_id"
+// Templates in https://business.facebook.com/wa/manage/message-templates
+const (
+	TemplateVerifyPhoneNumberID               string = "verify_phone_number_id"
+	TemplateCertificateAnnouncementIndonesian string = "certificate_announcement_indonesian"
+	TemplatePurchaseFeedback                  string = "purchase_feedback"
+	TemplateOTP                               string = "otp"
+)
 
-// Languages
-var Indonesian = TemplateLanguage{
-	Code: "id",
-}
+var (
+	LanguageIndonesian = TemplateLanguage{
+		Code: "id",
+	}
+)
