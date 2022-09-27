@@ -1,6 +1,6 @@
 package whatsapp
 
-type SendTemplateRequest struct {
+type SendWithTemplateRequest struct {
 	MessagingProduct string   `json:"messaging_product,omitempty"`
 	To               string   `json:"to,omitempty"`
 	Type             string   `json:"type,omitempty"`

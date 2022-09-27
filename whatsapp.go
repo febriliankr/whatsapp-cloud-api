@@ -3,7 +3,6 @@ package whatsapp
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -23,7 +22,7 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 }
 
 // Sending the whatsapp message
-func (wa *Whatsapp) SendWithTemplate(request SendTemplateRequest) (res map[string]interface{}, err error) {
+func (wa *Whatsapp) SendWithTemplate(request SendWithTemplateRequest) (res map[string]interface{}, err error) {
 	marshaledJSON, err := json.Marshal(request)
 	if err != nil {
 		return res, err
@@ -44,11 +43,12 @@ func (wa *Whatsapp) SendWithTemplate(request SendTemplateRequest) (res map[strin
 	if err != nil {
 		return res, err
 	}
+
 	defer resp.Body.Close()
 
 	err = json.NewDecoder(resp.Body).Decode(&res)
+
 	if err != nil {
-		log.Println("42 error:", err)
 		return res, err
 	}
 
@@ -104,8 +104,8 @@ func (wa *Whatsapp) TemplateComponent(componentType string, args ...[]TemplatePa
 //  2. `receiverPhoneNumber` is the phone number that will receive the message (eg: 62852000000)
 //  3. `components` is the parameters that will be sent to the receiver (eg: "999999" for OTP), can be empty if your template has no components
 //     components parameter can be empty/nil if you don't want to send any parameters
-func (wa *Whatsapp) CreateSendTemplateRequest(receiverPhoneNumber string, templateName string, language TemplateLanguage, components []Components) (res SendTemplateRequest) {
-	return SendTemplateRequest{
+func (wa *Whatsapp) CreateSendTemplateRequest(receiverPhoneNumber string, templateName string, language TemplateLanguage, components []Components) (res SendWithTemplateRequest) {
+	return SendWithTemplateRequest{
 		MessagingProduct: "whatsapp",
 		To:               receiverPhoneNumber,
 		Type:             "template",
