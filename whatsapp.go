@@ -23,7 +23,7 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 }
 
 // Sending the whatsapp message
-func (wa *Whatsapp) SendWithTemplateV2(request SendTemplateRequest) (res map[string]interface{}, err error) {
+func (wa *Whatsapp) SendWithTemplate(request SendTemplateRequest) (res map[string]interface{}, err error) {
 
 	marshaledJSON, err := json.Marshal(request)
 	if err != nil {
@@ -54,33 +54,6 @@ func (wa *Whatsapp) SendWithTemplateV2(request SendTemplateRequest) (res map[str
 	}
 
 	return res, err
-}
-
-// Sending the whatsapp message
-func (wa *Whatsapp) SendWithTemplate(request SendTemplateRequest) (*http.Response, error) {
-	marshaledJSON, err := json.Marshal(request)
-	if err != nil {
-		return nil, err
-	}
-	reqString := string(marshaledJSON)
-
-	body := strings.NewReader(reqString)
-
-	endpoint := fmt.Sprintf("https://graph.facebook.com/%s/%s/messages", wa.APIVersion, wa.PhoneNumberID)
-	req, err := http.NewRequest("POST", endpoint, body)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Set("Authorization", "Bearer "+wa.Token)
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	return resp, err
 }
 
 // Parameter if exists
