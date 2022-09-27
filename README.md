@@ -9,8 +9,8 @@ Go to your facebook developer console to get the token https://developers.facebo
 ## Usage
 
 ```
+// Initialize Whatsapp
 wa := whatsapp.NewWhatsapp(token, myPhoneId)
-
 
 // Send whatsapp text without parameters
 request := wa.CreateSendTemplateRequest("RECEIVER_PHONE_NUMBER", "your_template_name", whatsapp.Indonesian, nil)
