@@ -10,6 +10,12 @@ Made this cause I haven't found any reliable whatsapp cloud api wrapper for gola
 go get github.com/febriliankr/whatsapp-cloud-api
 ```
 
+or if you want to use specific version
+    
+    ```
+    go get github.com/febriliankr/whatsapp-cloud-api@v1.0.1
+    ```
+
 ## Getting the Whatsapp Cloud API Access
 
 Official documentation: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
