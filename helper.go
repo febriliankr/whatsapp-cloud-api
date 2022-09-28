@@ -1,13 +1,14 @@
 package whatsapp
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 type Media struct {
@@ -74,7 +75,7 @@ func (wa *Whatsapp) UploadMedia(filepath string) (id string, err error) {
 		return id, err
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return id, err
 	}
@@ -91,13 +92,11 @@ func (wa *Whatsapp) UploadMedia(filepath string) (id string, err error) {
 // Http post request to send the message
 func (wa *Whatsapp) sendMessage(request any) (res map[string]interface{}, err error) {
 
-	marshaledJSON, err := json.Marshal(request)
+	jsonRequest, err := json.Marshal(request)
 	if err != nil {
 		return res, err
 	}
-	reqString := string(marshaledJSON)
-
-	body := strings.NewReader(reqString)
+	body := bytes.NewReader(jsonRequest)
 
 	endpoint := fmt.Sprintf("https://graph.facebook.com/%s/%s/messages", wa.APIVersion, wa.PhoneNumberID)
 	req, err := http.NewRequest("POST", endpoint, body)
