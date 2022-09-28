@@ -17,7 +17,7 @@ import (
 
 // 	WHATSAPP_PHONE_ID := os.Getenv("WHATSAPP_PHONE_ID")
 // 	WHATSAPP_TOKEN := os.Getenv("WHATSAPP_TOKEN")
-// 	RECIPIENT_NUMBER := os.Getenv("RECIPIENT_NUMBER")
+// 	TO_PHONE_NUMBER := os.Getenv("TO_PHONE_NUMBER")
 
 // 	wa := NewWhatsapp(WHATSAPP_TOKEN, WHATSAPP_PHONE_ID)
 
@@ -25,7 +25,7 @@ import (
 
 // 	components := wa.TemplateComponent("body", parameters)
 
-// 	_, err = wa.SendWithTemplate(RECIPIENT_NUMBER, TemplateVerifyPhoneNumberID, components)
+// 	_, err = wa.SendWithTemplate(TO_PHONE_NUMBER, TemplateVerifyPhoneNumberID, components)
 
 // 	if err != nil {
 // 		t.Error(err)
@@ -41,10 +41,11 @@ func TestWhatsapp_SendText(t *testing.T) {
 
 	WHATSAPP_PHONE_ID := os.Getenv("WHATSAPP_PHONE_ID")
 	WHATSAPP_TOKEN := os.Getenv("WHATSAPP_TOKEN")
+	TO_PHONE_NUMBER := os.Getenv("TO_PHONE_NUMBER")
 
 	wa := NewWhatsapp(WHATSAPP_TOKEN, WHATSAPP_PHONE_ID)
 
-	res, err := wa.SendText("__", "testing")
+	res, err := wa.SendText(TO_PHONE_NUMBER, "nguing nguing")
 
 	if err != nil {
 		t.Error(err)

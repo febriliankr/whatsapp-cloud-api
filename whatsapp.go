@@ -17,6 +17,7 @@ func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 	}
 }
 
+// Sending plain text message to a phone number that has messaged your WhatsApp Business account in the past 24 hours.
 func (wa *Whatsapp) SendText(toPhoneNumber string, text string) (res map[string]interface{}, err error) {
 
 	request := map[string]interface{}{
@@ -31,23 +32,25 @@ func (wa *Whatsapp) SendText(toPhoneNumber string, text string) (res map[string]
 
 }
 
-// Sending the whatsapp message
-//  1. `templateName` and `language` can be found in `whatsapp/constants.go` or in your template list dashboard https://business.facebook.com/wa/manage/message-templates
-//  2. `receiverPhoneNumber` is the phone number that will receive the message (eg: 62852000000)
-//  3. `components` is the parameters that will be sent to the receiver (eg: "999999" for OTP), can be empty if your template has no components
-//     components parameter can be empty/nil if you don not want to send any parameters
-func (wa *Whatsapp) SendWithTemplate(receiverPhoneNumber string, templateName string, components []Components) (res map[string]interface{}, err error) {
+/*
+Sending a templated whatsapp message. `templateName` can be found in your template list dashboard https://business.facebook.com/wa/manage/message-templates
+`components` is the parameters that will be sent to the receiver (eg: "999999" for OTP), can be empty/nil if your template has no components.
+*/
+func (wa *Whatsapp) SendWithTemplate(toPhoneNumber string, templateName string, components []Components) (res map[string]interface{}, err error) {
 
-	request := wa.createSendWithTemplateRequest(receiverPhoneNumber, templateName, wa.Language, components)
+	request := wa.createSendWithTemplateRequest(toPhoneNumber, templateName, wa.Language, components)
 
 	return wa.sendMessage(request)
 }
 
-// Parameter if exists
-// Using GenerateTemplateParameters("text", "Good evening, Febrilian")
-// Generates this json for the "component" field in the Whatsapp CloudAPI body request:
-// `{ "type": "text", "text": "Good evening, Febrilian" }“
-// you can append between parameters if you have multiple `parameterType`, for example:
+// Generating parameter if exists
+/*
+Using GenerateTemplateParameters("text", "Good evening, Febrilian")
+Generates this json for the "component" field in the Whatsapp CloudAPI body request:
+`{ "type": "text", "text": "Good evening, Febrilian" }“
+you can append between parameters if you have multiple `parameterType`, for example:
+*/
+
 // ```
 // parameters := wa.GenerateTemplateParameters("text", "48884")
 // mediaParameters := wa.GenerateTemplateParameters("media", "media_url")

@@ -68,6 +68,12 @@ func (wa *Whatsapp) UploadMedia(filepath string) (id string, err error) {
 
 	defer resp.Body.Close()
 
+	// check resp http status
+	if resp.StatusCode != 200 {
+		err := parseHTTPError(resp.Body)
+		return id, err
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return id, err
@@ -92,8 +98,6 @@ func (wa *Whatsapp) sendMessage(request any) (res map[string]interface{}, err er
 	}
 	reqString := string(marshaledJSON)
 
-	log.Println("body", reqString)
-
 	body := strings.NewReader(reqString)
 
 	endpoint := fmt.Sprintf("https://graph.facebook.com/%s/%s/messages", wa.APIVersion, wa.PhoneNumberID)
@@ -110,6 +114,13 @@ func (wa *Whatsapp) sendMessage(request any) (res map[string]interface{}, err er
 	}
 
 	defer resp.Body.Close()
+
+	log.Println("resp.StatusCode", resp.StatusCode)
+	// check resp http status
+	if resp.StatusCode != 200 {
+		err := parseHTTPError(resp.Body)
+		return res, err
+	}
 
 	err = json.NewDecoder(resp.Body).Decode(&res)
 
