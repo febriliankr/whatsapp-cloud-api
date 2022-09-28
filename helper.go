@@ -79,13 +79,12 @@ func (wa *Whatsapp) UploadMedia(filepath string) (id string, err error) {
 		return id, err
 	}
 	fmt.Printf("%s\n", string(body))
-	var res map[string]interface{}
+	var res map[string]string
 	err = json.NewDecoder(resp.Body).Decode(&res)
 	if err != nil {
 		return id, err
 	}
-	log.Println("res", res)
-	// id = res["id"]
+	id = res["id"]
 	return id, err
 }
 
