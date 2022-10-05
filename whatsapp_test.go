@@ -42,7 +42,6 @@ func TestWhatsapp_SendText(t *testing.T) {
 	WHATSAPP_PHONE_ID := os.Getenv("WHATSAPP_PHONE_ID")
 	WHATSAPP_TOKEN := os.Getenv("WHATSAPP_TOKEN")
 	TO_PHONE_NUMBER := os.Getenv("TO_PHONE_NUMBER")
-
 	wa := NewWhatsapp(WHATSAPP_TOKEN, WHATSAPP_PHONE_ID)
 
 	res, err := wa.SendText(TO_PHONE_NUMBER, "nguing nguing")

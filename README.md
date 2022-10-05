@@ -33,20 +33,33 @@ go get github.com/febriliankr/whatsapp-cloud-api@v1.0.2
 wa := whatsapp.NewWhatsapp(token, myPhoneID)
 ```
 
-### Send a message with one parameter
+Modifying instance 
+- Changing the language `wa.Language = TemplateLanguage{ Code: "id" }`
+- Changing the API version `wa.APIVersion = "v14.0"`
+- Changing the Whatsapp Phone ID `wa.PhoneNumberID = WHATSAPP_PHONE_ID`
+
+### Send a templated message
+
+With one parameter
 
 ```
 parameters := wa.GenerateTemplateParameters("text", "48884")
 components := wa.TemplateComponent("body", parameters)
-request := wa.CreateSendTemplateRequest("RECEIVER_PHONE_NUMBER", "your_template_name", whatsapp.Indonesian, components)
-res, err := wa.SendWithTemplate(request)
+res, err := wa.SendWithTemplate("RECEIVER_PHONE_NUMBER", "your_template_name", components)
 ```
 
-### Send a message with no parameter
+with no parameter
 
 ```
-request := wa.CreateSendTemplateRequest("RECEIVER_PHONE_NUMBER", "your_template_name", whatsapp.Indonesian, nil)
-res, err := wa.SendWithTemplate(request)
+res, err := wa.SendWithTemplate("RECEIVER_PHONE_NUMBER", "your_template_name", nil)
+```
+
+### Send a plain text message
+
+Sending plain text message to a phone number that has messaged your WhatsApp Business account in the past 24 hours.
+
+```
+res, err := wa.SendText("RECEIVER_PHONE_NUMBER", "your_message")
 ```
 
 Check more usage example in example/example.go
