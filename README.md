@@ -8,7 +8,8 @@ Made this cause I haven't found any reliable whatsapp cloud api wrapper for gola
 
 Content
 
-- [Installation](#installation)
+- [Install](#install)
+- [Usage](#usage)
 - [Getting the Whatsapp Cloud API Access](#getting-the-whatsapp-cloud-api-access)
 - [FAQ](#faq)
 - [Usage](#usage)
@@ -85,13 +86,6 @@ Official documentation:
   - Answer: This Cloud API is provided directly by Meta, no need to use 3rd party provider.
   - More: https://techcrunch.com/2022/05/19/whatsapp-ramps-up-revenue-with-global-launch-of-cloud-api-and-soon-a-paid-tier-for-its-business-app/
   - https://www.qiscus.com/id/blog/meta-luncurkan-whatsap-cloud-api-untuk-publik/
-
-### Changing Whatsapp Cloud API version
-
-```
-wa := whatsapp.NewWhatsapp(token, myPhoneID)
-wa.APIVersion = "v2"
-```
 
 ## Tutorial for Myself!
 
