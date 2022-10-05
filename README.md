@@ -13,7 +13,7 @@ Content
 - [FAQ](#faq)
 - [Usage](#usage)
 
-## Instal
+## Install
 
 ```
 go get github.com/febriliankr/whatsapp-cloud-api
