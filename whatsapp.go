@@ -98,7 +98,7 @@ func (wa *Whatsapp) createSendWithTemplateRequest(receiverPhoneNumber string, te
 		Type:             "template",
 		Template: Template{
 			Name:     templateName,
-			Language: LanguageIndonesian,
+			Language: language,
 			// Components can be empty if you don't want to send any parameters
 			Components: components,
 		},
