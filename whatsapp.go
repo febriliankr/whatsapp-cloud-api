@@ -7,10 +7,10 @@ type Whatsapp struct {
 	Language      TemplateLanguage
 }
 
-// Create new Whatsapp instance with v14.0 version and Indonesian as default language
+// Create new Whatsapp instance with v14.0 version and English as default language
 func NewWhatsapp(token string, phoneNumberID string) *Whatsapp {
 	return &Whatsapp{
-		Language:      LanguageIndonesian,
+		Language:      LanguageEnglish,
 		Token:         token,
 		APIVersion:    "v14.0",
 		PhoneNumberID: phoneNumberID,

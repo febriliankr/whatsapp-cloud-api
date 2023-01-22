@@ -34,7 +34,8 @@ go get github.com/febriliankr/whatsapp-cloud-api@v1.0.2
 wa := whatsapp.NewWhatsapp(token, myPhoneID)
 ```
 
-Modifying instance 
+Modifying instance
+
 - Changing the language `wa.Language = TemplateLanguage{ Code: "id" }`
 - Changing the API version `wa.APIVersion = "v14.0"`
 - Changing the Whatsapp Phone ID `wa.PhoneNumberID = WHATSAPP_PHONE_ID`
@@ -68,6 +69,7 @@ Check more usage example in example/example.go
 ## Getting the Whatsapp Cloud API Access
 
 Official documentation:
+
 - https://developers.facebook.com/docs/whatsapp?locale=en_US
 - https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
 - Console: https://developers.facebook.com/apps/2017523718408931/whatsapp-business/wa-dev-console
