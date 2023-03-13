@@ -131,7 +131,7 @@ func (wa *Whatsapp) sendMessage(request any) (res map[string]interface{}, err er
 	if err != nil {
 		return res, err
 	}
-	err = json.NewDecoder(resp.Body).Decode(&res)
+err = json.NewDecoder(bytes.NewReader(bodyBytes)).Decode(&res)
 
 	if err != nil {
 		return res, err
