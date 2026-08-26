@@ -1,3 +1,5 @@
+
+
 # Whatsapp Cloud API Wrapper for Golang
 
 ## About
@@ -12,7 +14,6 @@ Content
 - [Usage](#usage)
 - [Getting the Whatsapp Cloud API Access](#getting-the-whatsapp-cloud-api-access)
 - [FAQ](#faq)
-- [Usage](#usage)
 
 ## Install
 
